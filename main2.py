@@ -61,9 +61,7 @@ if __name__ == '__main__':
     # db_init()
     # db_add_stars(stars)
 
-    # 셔플하기 3회
-    random.shuffle(stars)
-    random.shuffle(stars)
+    # 셔플하기
     random.shuffle(stars)
 
     # 네명씩 조짜기
