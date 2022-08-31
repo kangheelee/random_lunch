@@ -1,4 +1,5 @@
 
+from calendar import week
 from slack import get_user_ids, send_mim_msg, send_pub_msg, get_conversations
 import random
 # 중복 피할 경우 db 필요
@@ -77,8 +78,13 @@ if __name__ == '__main__':
         if stars.index(star) == len(stars) - 1:
             weekly.append(tmp)
 
-    pairs = 0
+    # 마지막 인원이 1명인 경우 합치기
+    if len(weekly[-1]) == 1:
+        last_star = weekly.pop()
+        weekly[-1].extend(last_star)
+
     # 조마다 DM 보내기(마지막조가 3명 또는 2명 또는 1명인 경우 포함)
+    pairs = 0
     for group in weekly:
         if len(group) == 4:
             msg = msg_template.format(group[0], group[1], group[2], group[3])
@@ -104,6 +110,6 @@ if __name__ == '__main__':
 
     # Send public message
     pub_msg = pub_msg_template.format(pairs)
-    send_pub_msg(pub_msg, group)
+    send_pub_msg(pub_msg)
 
     # db_close()
