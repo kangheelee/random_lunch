@@ -34,8 +34,8 @@ msg_template3 = '''
 pub_msg_template = '''
 🐶 월월! 🦴....\n
 - 이번 주 매칭된 조: {}개 \n
-- 미션1(선택): 인증 사진으로 자랑하기 \n
-- 미션2(선택): 운 없이 홀로 선정된 팀원 구해주기
+- 미션1(선택): 맛있는 식사와 함께 멋진 시간 보내기\n
+- 미션2(선택): 인증 사진으로 #team_zep_lunch 채널에 자랑하기
 '''
 
 msg_template5 = '''
@@ -85,10 +85,14 @@ if __name__ == '__main__':
         if stars.index(star) == len(stars) - 1:
             weekly.append(tmp)
 
-    # 마지막 인원이 1명인 경우 합치기
+    # 마지막 그룹의 인원이 1명 또는 2명인 경우 다른 그룹에 합치기
     if len(weekly[-1]) == 1:
         last_star = weekly.pop()
         weekly[-1].extend(last_star)
+    elif len(weekly[-1]) == 2:
+        last_star = weekly.pop()
+        weekly[-1].append(last_star[0])
+        weekly[-2].append(last_star[1])
 
     # 조마다 DM 보내기(마지막조가 3명 또는 2명 또는 1명인 경우 포함)
     pairs = 0
@@ -106,7 +110,8 @@ if __name__ == '__main__':
             send_mim_msg(group, msg=msg)
             pairs = pairs + 1
         elif len(group) == 5:
-            msg = msg_template5.format(group[0], group[1], group[2], group[3], group[4])
+            msg = msg_template5.format(
+                group[0], group[1], group[2], group[3], group[4])
             send_mim_msg(group, msg=msg)
             pairs = pairs + 1
         else:
