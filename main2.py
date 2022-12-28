@@ -46,9 +46,9 @@ msg_template5 = '''
 '''
 
 if __name__ == '__main__':
-
     # 이모지를 누른 사람 리스트업
     recent_bot_message = get_conversations()
+    reactions = []
     for mes in recent_bot_message:
         try:
             # you need to know bot id you made for random lunch bot
