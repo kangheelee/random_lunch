@@ -1,9 +1,6 @@
-from slack import get_user_ids, send_mim_msg, send_pub_msg, get_conversations, get_offstage_channel_id
-# Import WebClient from Python SDK (github.com/slackapi/python-slack-sdk)
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
-
-if __name__ == '__main__':
+if __name__ == '__test__':
+    print(__name__)
+    print("hi")
     recent_bot_message = get_conversations()
     for mes in recent_bot_message:
         try:
